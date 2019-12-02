@@ -18,7 +18,7 @@ WHEN PULLING GIT
 
 2. Change sagas.jsx to the URL of either cloud9:3000 or localhost:3000
 
-3)`npm run build` in same same folder as package.json
+3. `npm run build` in same same folder as package.json
 
 4. in dist folder, create index.html and paste below html
 
