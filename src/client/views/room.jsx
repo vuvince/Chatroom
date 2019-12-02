@@ -57,6 +57,7 @@ class Room extends Component {
       margin: "5px 0"
     };
 
+    
     const isMe = true;
     const floatDirection = isMe ? "right" : "left";
     const nameColor = isMe ? "green" : "red";
