@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Welcome, Room } from "./views";
+import { Login, Room } from "./views";
 
 class App extends Component {
   render() {
@@ -9,7 +9,7 @@ class App extends Component {
     if (username) {
       body = <Room />;
     } else {
-      body = <Welcome />;
+      body = <Login />;
     }
 
     return <div>{body}</div>;

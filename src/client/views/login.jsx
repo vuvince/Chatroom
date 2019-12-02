@@ -46,7 +46,7 @@ const styles = theme => ({
   }
 });
 
-class Welcome extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -136,7 +136,9 @@ class Welcome extends Component {
 
     return (
       <Dialog aria-labelledby="form-dialog-title" open={true}>
-        <DialogTitle id="form-dialog-title">Welcome to HDDS Chat!</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Login to Facebewk Chat!
+        </DialogTitle>
         <Tabs value={value} onChange={this.handleChange}>
           <Tab label="Join a Chatroom" />
           <Tab label="Create a Chatroom" />
@@ -236,4 +238,4 @@ function select({ app, users, messages, thisUser }) {
   return { app, users, messages, thisUser };
 }
 
-export default connect(select)(Welcome);
+export default connect(select)(Login);

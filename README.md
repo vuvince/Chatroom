@@ -27,7 +27,7 @@ WHEN PULLING GIT
 6. go to localhost:3000 or c9:3000
 
 7. Enjoy:)
-
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -52,3 +52,4 @@ WHEN PULLING GIT
     <script src="./bundle.js"></script>
   </body>
 </html>
+```
