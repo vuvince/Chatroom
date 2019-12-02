@@ -12,12 +12,22 @@ If changes are made to backend (index.js), all that needs to be done is file nee
 
 Done.
 
-WHEN PULLING:
-`npm install` in same folder as package.json
+WHEN PULLING GIT
 
-`npm run build` in same folder
+1. `npm install` in same folder as package.json
 
-`in dist folder, create index.html and paste following:`
+2. Change sagas.jsx to the URL of either cloud9:3000 or localhost:3000
+
+3)`npm run build` in same same folder as package.json
+
+4. in dist folder, create index.html and paste below html
+
+5. cd into /src/server and run node index
+
+6. go to localhost:3000 or c9:3000
+
+7. Enjoy:)
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,4 +52,3 @@ WHEN PULLING:
     <script src="./bundle.js"></script>
   </body>
 </html>
-
