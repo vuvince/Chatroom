@@ -99,7 +99,7 @@ class Room extends Component {
         <AppBar position="static" style={{ flexGrow: 1 }}>
           <Toolbar>
             <Typography variant="h6" color="inherit" style={{ flexGrow: 1 }}>
-              Facebewk Messenger: {app.rooms[room]}
+              Facebewk Chat: {app.rooms[room]}
             </Typography>
 
             <Button color="inherit" onClick={this.handleLogout.bind(this)}>

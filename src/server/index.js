@@ -22,9 +22,8 @@ let usernames = [];
 
 //HANDLING SOCKETS
 io.on("connection", function(socket) {
-  stack.push(socket);
-
   socket.on("login", function({ username, room }) {
+    stack.push(socket);
     console.log(`[server] login: ${username + " -> " + room}`);
     usernames.push(username);
     socket.join(room);
@@ -77,6 +76,7 @@ io.on("connection", function(socket) {
     }
     return availableRooms;
   }
+
   socket.on("rooms", function() {
     const rooms = findRooms();
     io.emit("rooms.list", { rooms: rooms });
