@@ -57,7 +57,7 @@ class Room extends Component {
       margin: "5px 0"
     };
 
-    const isMe = message.username === item.username;
+    const isMe = true;
     const floatDirection = isMe ? "right" : "left";
     const nameColor = isMe ? "green" : "red";
     const margin = isMe ? " 0 0 0 40px" : "0 40px 0 0 ";

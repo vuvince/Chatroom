@@ -13,7 +13,7 @@ import {
 } from "./actions";
 
 function connect() {
-  const socket = io("http://3.86.167.10:3000/");
+  const socket = io("http://54.209.74.189:3000/");
   return new Promise(resolve => {
     socket.on("connect", () => {
       resolve(socket);
