@@ -2,6 +2,9 @@ const serve = require("koa-static-server");
 const koa = require("koa");
 const app = new koa();
 const http = require("http");
+const readline = require('readline');
+
+stack = [];
 
 app.use(serve({ rootDir: "../../dist" }));
 
@@ -16,10 +19,16 @@ const server = http.createServer(app.callback());
 const io = require("socket.io")(server);
 let activeroom = null;
 let usernames = [];
+<<<<<<< HEAD
 
 //HANDLING SOCKETS
 io.on("connection", socket => {
   socket.on("login", ({ username, room }) => {
+=======
+io.on("connection", function(socket) {
+  socket.on("login", function({ username, room }) {
+    stack.push(socket);
+>>>>>>> 759ce981f6e46c416a13cae4dc360bcb88e83ede
     console.log(`[server] login: ${username + " -> " + room}`);
     usernames.push(username);
     socket.join(room);
@@ -78,6 +87,32 @@ io.on("connection", socket => {
   });
 });
 
+function askQuestion(query) {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    return new Promise(resolve => rl.question(query, ans => {
+        rl.close();
+        resolve(ans);
+    }))
+}
+
 //process.env.PORT ||
 const port = 3000;
+<<<<<<< HEAD
 server.listen(port, () => console.log(`listening on port ${port}`));
+=======
+server.listen(port, async ()=> {
+  console.log(`listening on port ${port}`);
+  const ans = await askQuestion("Press Enter to close server");
+  while(stack.length){
+    var s = stack.pop();
+    console.log('Disconnecting: '+ s.id);
+    s.disconnect(true);
+  }
+  console.log('Closing Server');
+  process.exit();
+});
+>>>>>>> 759ce981f6e46c416a13cae4dc360bcb88e83ede
