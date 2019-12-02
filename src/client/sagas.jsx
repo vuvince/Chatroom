@@ -38,6 +38,8 @@ function subscribe(socket) {
 
     socket.on("disconnect", e => {
       // TODO: handle
+      alert("Disconnected");
+      window.location.reload();
     });
     return () => {};
   });
