@@ -3,7 +3,7 @@ const koa = require("koa");
 const app = new koa();
 const http = require("http");
 
-app.use(serve({ rootDir: "../../dist" })); 
+app.use(serve({ rootDir: "../../dist" }));
 
 app.use(async next => {
   if (this.path !== "/") {
@@ -16,8 +16,10 @@ const server = http.createServer(app.callback());
 const io = require("socket.io")(server);
 let activeroom = null;
 let usernames = [];
-io.on("connection", function(socket) {
-  socket.on("login", function({ username, room }) {
+
+//HANDLING SOCKETS
+io.on("connection", socket => {
+  socket.on("login", ({ username, room }) => {
     console.log(`[server] login: ${username + " -> " + room}`);
     usernames.push(username);
     socket.join(room);
@@ -26,7 +28,7 @@ io.on("connection", function(socket) {
     socket.emit("users.login", { username, room });
   });
 
-  socket.on("message", function({ text }) {
+  socket.on("message", ({ text }) => {
     activeroom = Object.keys(socket.rooms).slice(1);
     console.log(`[server] message: ${text}` + ` -> room: ${activeroom}`);
     const message = {
@@ -37,7 +39,7 @@ io.on("connection", function(socket) {
     io.to(activeroom).emit("messages.new", { message });
   });
 
-  socket.on("logout", function({ username }) {
+  socket.on("logout", ({ username }) => {
     if (username) {
       console.log(`[server] logout: ${username}`);
       usernames = usernames.filter(u => u !== username);
@@ -46,7 +48,7 @@ io.on("connection", function(socket) {
     }
   });
 
-  socket.on("disconnect", function({ username }) {
+  socket.on("disconnect", ({ username }) => {
     console.log(`[server] disconnected: ${socket.id} disconnect!`);
 
     const i = usernames.indexOf(username);
@@ -61,7 +63,6 @@ io.on("connection", function(socket) {
     if (rooms) {
       for (const room in rooms) {
         if (!sockets[room]) {
-          // if (room.slice(0, 2) === "/#") continue;
           availableRooms.push({
             name: room,
             counts: io.sockets.adapter.rooms[room].length
@@ -79,4 +80,4 @@ io.on("connection", function(socket) {
 
 //process.env.PORT ||
 const port = 3000;
-server.listen(port, ()=> console.log(`listening on port ${port}`));
+server.listen(port, () => console.log(`listening on port ${port}`));
