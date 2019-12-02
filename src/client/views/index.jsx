@@ -1,4 +1,4 @@
-import Welcome from "./welcome";
+import Login from "./login";
 import Room from "./room";
 
-export { Welcome, Room };
+export { Login, Room };

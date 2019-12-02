@@ -57,7 +57,6 @@ class Room extends Component {
       margin: "5px 0"
     };
 
-    
     const isMe = true;
     const floatDirection = isMe ? "right" : "left";
     const nameColor = isMe ? "green" : "red";
@@ -100,7 +99,7 @@ class Room extends Component {
         <AppBar position="static" style={{ flexGrow: 1 }}>
           <Toolbar>
             <Typography variant="h6" color="inherit" style={{ flexGrow: 1 }}>
-              HDDS Chat: {app.rooms[room]}
+              Facebewk Messenger: {app.rooms[room]}
             </Typography>
 
             <Button color="inherit" onClick={this.handleLogout.bind(this)}>
