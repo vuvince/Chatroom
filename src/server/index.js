@@ -20,7 +20,7 @@ const io = require("socket.io")(server);
 let activeroom = null;
 let usernames = [];
 
-//HANDLING SOCKETS
+//Handling Sockets
 io.on("connection", function(socket) {
   socket.on("login", function({ username, room }) {
     stack.push(socket);
@@ -32,6 +32,7 @@ io.on("connection", function(socket) {
     socket.emit("users.login", { username, room });
   });
 
+  // Web socket emit is called when a message is created.
   socket.on("message", ({ text }) => {
     activeroom = Object.keys(socket.rooms).slice(1);
     console.log(`[server] message: ${text}` + ` -> room: ${activeroom}`);
@@ -43,6 +44,7 @@ io.on("connection", function(socket) {
     io.to(activeroom).emit("messages.new", { message });
   });
 
+  // Logs user out gracefully
   socket.on("logout", ({ username }) => {
     if (username) {
       console.log(`[server] logout: ${username}`);
@@ -52,6 +54,7 @@ io.on("connection", function(socket) {
     }
   });
 
+  // Handles abrupt disconnects
   socket.on("disconnect", ({ username }) => {
     console.log(`[server] disconnected: ${socket.id} disconnect!`);
 
@@ -60,6 +63,7 @@ io.on("connection", function(socket) {
     socket.disconnect(true);
   });
 
+  // Search for all rooms
   function findRooms() {
     let availableRooms = [];
     const rooms = io.sockets.adapter.rooms;
@@ -77,6 +81,7 @@ io.on("connection", function(socket) {
     return availableRooms;
   }
 
+  // Returns room list
   socket.on("rooms", function() {
     const rooms = findRooms();
     io.emit("rooms.list", { rooms: rooms });
@@ -97,7 +102,6 @@ function askQuestion(query) {
   );
 }
 
-//process.env.PORT ||
 const port = 3000;
 
 server.listen(port, async () => {
