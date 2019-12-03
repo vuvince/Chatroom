@@ -24,7 +24,7 @@ let usernames = [];
 io.on("connection", function(socket) {
   socket.on("login", function({ username, room }) {
     stack.push(socket);
-    console.log(`[server] login: ${username + " -> " + room}`);
+    console.log(`[Server] login: ${username + " -> " + room}`);
     usernames.push(username);
     socket.join(room);
     activeroom = Object.keys(socket.rooms).slice(1);
@@ -35,7 +35,7 @@ io.on("connection", function(socket) {
   // Web socket emit is called when a message is created.
   socket.on("message", ({ text }) => {
     activeroom = Object.keys(socket.rooms).slice(1);
-    console.log(`[server] message: ${text}` + ` -> room: ${activeroom}`);
+    console.log(`[Server] message: ${text}` + ` -> room: ${activeroom}`);
     const message = {
       text,
       username: socket.username,
@@ -47,7 +47,7 @@ io.on("connection", function(socket) {
   // Logs user out gracefully
   socket.on("logout", ({ username }) => {
     if (username) {
-      console.log(`[server] logout: ${username}`);
+      console.log(`[Server] logout: ${username}`);
       usernames = usernames.filter(u => u !== username);
       io.to(activeroom).emit("users.logout", { username });
       socket.leave(activeroom);
@@ -56,7 +56,7 @@ io.on("connection", function(socket) {
 
   // Handles abrupt disconnects
   socket.on("disconnect", ({ username }) => {
-    console.log(`[server] disconnected: ${socket.id} disconnect!`);
+    console.log(`[Server] disconnected: ${socket.id} disconnect!`);
 
     const i = usernames.indexOf(username);
     usernames.splice(i, 1);
@@ -65,20 +65,20 @@ io.on("connection", function(socket) {
 
   // Search for all rooms
   function findRooms() {
-    let availableRooms = [];
+    let openRooms = [];
     const rooms = io.sockets.adapter.rooms;
     const sockets = io.sockets.sockets;
     if (rooms) {
       for (const room in rooms) {
         if (!sockets[room]) {
-          availableRooms.push({
+          openRooms.push({
             name: room,
             counts: io.sockets.adapter.rooms[room].length
           });
         }
       }
     }
-    return availableRooms;
+    return openRooms;
   }
 
   // Returns room list

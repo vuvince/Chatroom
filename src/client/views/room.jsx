@@ -53,7 +53,7 @@ class Room extends Component {
   renderMessages(item, i) {
     const style = {
       display: "block",
-      margin: "5px 0",
+      margin: "5px 0"
     };
 
     const isMe = true;
