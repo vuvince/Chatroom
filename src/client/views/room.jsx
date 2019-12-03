@@ -6,10 +6,9 @@ import Button from "@material-ui/core/Button/Button";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import { Toolbar, Typography } from "@material-ui/core";
 import { logout } from "../actions";
-// import { app } from "../reducers";
 
 const style = {
-  backgroundColor: "#eaeaea",
+  backgroundColor: "#ffffff",
   padding: 15,
   height: "420px",
   overflowY: "auto",
@@ -54,17 +53,17 @@ class Room extends Component {
   renderMessages(item, i) {
     const style = {
       display: "block",
-      margin: "5px 0"
+      margin: "5px 0",
     };
 
     const isMe = true;
     const floatDirection = isMe ? "right" : "left";
-    const nameColor = isMe ? "green" : "red";
+    const nameColor = isMe ? "#3BECE8" : "#8CEC3B";
     const margin = isMe ? " 0 0 0 40px" : "0 40px 0 0 ";
 
     const textStyle = {
       float: floatDirection,
-      backgroundColor: "#fff",
+      backgroundColor: "#165BF1 ",
       padding: "6px 10px",
       borderRadius: "15px",
       margin: margin,
@@ -99,9 +98,8 @@ class Room extends Component {
         <AppBar position="static" style={{ flexGrow: 1 }}>
           <Toolbar>
             <Typography variant="h6" color="inherit" style={{ flexGrow: 1 }}>
-              Facebewk Chat: {app.rooms[room]}
+              3319 - Project: {app.rooms[room]}
             </Typography>
-
             <Button color="inherit" onClick={this.handleLogout.bind(this)}>
               Logout
             </Button>

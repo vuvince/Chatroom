@@ -137,7 +137,7 @@ class Login extends Component {
     return (
       <Dialog aria-labelledby="form-dialog-title" open={true}>
         <DialogTitle id="form-dialog-title">
-          Login to Facebewk Chat!
+          Login to Chat!
         </DialogTitle>
         <Tabs value={value} onChange={this.handleChange}>
           <Tab label="Join a Chatroom" />
